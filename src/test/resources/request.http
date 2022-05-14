@@ -1,0 +1,101 @@
+### Получение всех user'ов
+GET http://localhost:8080/user/getAll?limit=50&offset=0
+X-Login: admin
+X-Password: skyteam
+
+### Получение user'a по id
+GET http://localhost:8080/user/getById?id=2
+X-Login: admin
+X-Password: skyteam
+
+### Регистрация нового user'a
+GET http://localhost:8080/user/register?login=oleg&password=skyteam
+
+### Получение информации о me (тот чей login & password передаем в запросе).
+GET http://localhost:8080/user/me
+X-Login: pasha
+X-Password: skyteam
+
+### Получение информации о me, при анонимном запросе (anonymous)
+GET http://localhost:8080/user/me
+
+### Admin может удалить любого user'а
+GET http://localhost:8080/user/removeById?id=43
+X-Login: admin
+X-Password: skyteam
+
+### Admin может восстановить любого user'а
+GET http://localhost:8080/user/restoreById?id=43
+X-Login: admin
+X-Password: skyteam
+
+--Airplanes
+
+### Admin,user,anonymous могут получать все самолёты
+GET http://localhost:8080/airplane/getAll?limit=100&offset=0
+
+### Любой user может получить все самолеты по id
+GET http://localhost:8080/airplane/getById?id=2
+
+### Не anonymous может создавать (create) самолеты
+GET http://localhost:8080/airplane/create?name=Cessna-318RG&maxSpeed=228&weight=1500&year=1956&photo=C-318crt.jpg&price=5000000
+X-Login: pasha
+X-Password: skyteam
+
+### Только admin может обновлять самолеты
+GET http://localhost:8080/airplane/update?id=1&name=Cessna-150N&maxSpeed=259&weight=1730&year=1956&photo=C-150.jpg&price=5000000
+X-Login: admin
+X-Password: skyteam
+
+### User может удалять самолеты по id (корзина)
+GET http://localhost:8080/airplane/removeById?id=2
+X-Login: admin
+X-Password: skyteam
+
+### Admin может востанавливать удаленные самолеты по id
+GET http://localhost:8080/airplane/restoreById?id=44
+X-Login: admin
+X-Password: skyteam
+
+### Admin может смотреть все удаленные самолеты
+GET http://localhost:8080/airplane/getAllRemoved?limit=100&offset=0
+X-Login: admin
+X-Password: skyteam
+
+---Aircraft media request
+
+### Картинка по запросу С-150,C-172,C-182
+POST http://localhost:8080/media/upload-data
+Content-Type: image/jpeg
+
+< ./C-182RG.jpg
+
+### Запуск картинки по запросу С-150,C-172,C-182
+GET http://localhost:8080/750aff56-94a7-428d-9d7b-dc884db95e5a.jpg
+
+--Aircraft purchase application
+
+### Создание заявки
+GET http://localhost:8080/application/create?airplaneId=1&email=my@alex
+X-Login: dasha
+X-Password: skyteam
+
+### Получение всех заявок (только админ)
+GET http://localhost:8080/application/getAll?limit=50&offset=0
+X-Login: admin
+X-Password: skyteam
+
+### Получение всех заявок по статусу (только админ)
+GET http://localhost:8080/application/getAllByStatus?limit=50&offset=0&status=true
+X-Login: admin
+X-Password: skyteam
+
+### Только admin может обновлять заявку
+GET http://localhost:8080/application/update?id=5&airplaneId=2&email=my@sky&processed=false
+X-Login: admin
+X-Password: skyteam
+
+### Получение завки по id админом
+GET http://localhost:8080/application/getById?id=10
+X-Login: admin
+X-Password: skyteam
